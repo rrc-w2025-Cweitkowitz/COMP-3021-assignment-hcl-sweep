@@ -3,7 +3,7 @@ import java.io.*;
 public class SerializeCookie {
   public static void main(String[] args) {
     Cookie cookieObj = new Cookie();
-    cookieObj.setValue("Fed");
+    cookieObj.setValue("Bob");
     
     try {
       FileOutputStream fos = new FileOutputStream("cookies.ser");
