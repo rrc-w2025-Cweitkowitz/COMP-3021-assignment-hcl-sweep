@@ -29,8 +29,27 @@ def save_to_db(data):
     cursor.close()
     connection.close()
 
+import pickle
+import base64
+
+# Vulnerable: Unpickling user-controlled data
+def load_user_data(serialized_data):
+    return pickle.loads(base64.b64decode(serialized_data))
+
+import os
+
+# Vulnerable: Command injection via user input
+def run_ping(hostname):
+    os.system("ping -c 1 " + hostname)
+
+# Vulnerable: Executes arbitrary python code
+def calculate_expression(expression):
+    return eval(expression)
+
+
 if __name__ == '__main__':
     user_input = get_user_input()
     data = get_data()
     save_to_db(data)
     send_email('admin@example.com', 'User Input', user_input)
+
